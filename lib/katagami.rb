@@ -7,6 +7,10 @@ require 'active_support/core_ext'
 require 'positive_basic_support'
 require 'positive_number_support'
 
+require "katagami/image"
+require "katagami/image/file"
+require "katagami/args"
+
 module Katagami
 
   TOP_DIR = "/Users/shufujita/Creative Cloud Files/Materials/IseKatagami"
@@ -20,28 +24,35 @@ module Katagami
     private
 
     def set_dictionary_as_const
-      csv_filename = "#{ TOP_DIR }/list,csv"
-      ary = open( csv_filename , "r:windows-31j" ).read.split( /\n/ ).
+      csv_filename = "#{ TOP_DIR }/list.csv"
+      ary = open( csv_filename , "r:windows-31j" ).read.split( /(?:\n|\r\n)/ )
       dict = ary.map { | row |
         num_s , title = row.encode( "UTF-8" ).split( /,/ )
         ::Katagami::Image.new( num_s.to_i , title )
       }
       const_set( :DICTIONARY , dict )
+
+      return nil
     end
 
   end
 
-  def select_and_copy_files( of: nil ,type_of: nil )
+  def self.select_and_copy_files( of: nil ,type_of: nil )
     method_or_words = of
     filetype = type_of
 
-    raise unless method_or_words.string_or_symbol? or ( method_or_words.array? and method_or_words.all? { | item | item.string_or_symbol? or item.regexp? } )
+    raise unless method_or_words.string_or_symbol? method_or_words.regexp? or ( method_or_words.array? and method_or_words.all? { | item | item.string_or_symbol? or item.regexp? } )
     raise unless filetype.string_or_symbol?
 
     args_send_to_each_image = ::Katagami::Args.set_args_of( method_or_words )
     dir_of_date = ::Time.now.strftime( "%Y%m%d_%H%M%S" )
 
     selected_images = DICTIONARY.select { | image | image.send( *args_send_to_each_image ) }
+
+    puts "#{ selected_images.length} images"
+    puts "args: #{ args_send_to_each_image.to_s }"
+    gets.chomp
+
     selected_images.each do | image |
       image.copy( to: dir_of_date , type_of: filetype )
     end
@@ -50,6 +61,9 @@ module Katagami
 end
 
 __END__
+
+# Katagami.init
+# Katagami.select_and_copy_files( of:/波/ , type_of: :jpg )
 
 class KatagamiList < Array
 

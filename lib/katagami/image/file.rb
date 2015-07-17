@@ -2,7 +2,7 @@ class Katagami::Image::File
 
   def initialize( number , filetype )
     @number = number
-    set_filetype
+    set_filetype( filetype )
   end
 
   def copy( to: nil )
