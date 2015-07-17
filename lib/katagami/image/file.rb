@@ -13,6 +13,7 @@ class Katagami::Image::File
 
     puts "#{ before } => #{ after }"
 
+    ::FileUtils.mkdir_p( ::File.dirname( after ) )
     ::FileUtils.copy_file( before , after )
 
     return nil
