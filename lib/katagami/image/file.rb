@@ -8,8 +8,8 @@ class Katagami::Image::File
   def copy_file( to: nil )
     raise unless to.string?
     dir = to
-    before = filename_new( dir )
-    after = filename
+    before = filename
+    after = filename_new( dir )
 
     puts "#{ before } => #{ after }"
 
