@@ -41,7 +41,6 @@ module Katagami
     method_or_words = of
     filetype = type_of
 
-    raise unless method_or_words.string_or_symbol? method_or_words.regexp? or ( method_or_words.array? and method_or_words.all? { | item | item.string_or_symbol? or item.regexp? } )
     raise unless filetype.string_or_symbol?
 
     args_send_to_each_image = ::Katagami::Args.set_args_of( method_or_words )

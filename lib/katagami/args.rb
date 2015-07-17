@@ -10,7 +10,7 @@ module Katagami::Args
         searched_word = method_or_words
         return [ "related_to?" , searched_word ]
       end
-    else
+    elsif method_or_words.regexp? or ( method_or_words.array? and method_or_words.all? { | item | item.string_or_symbol? or item.regexp? } )
       return [ "related_to?" , method_or_words ].flatten
     end
   end
