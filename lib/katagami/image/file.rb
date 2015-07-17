@@ -42,7 +42,7 @@ class Katagami::Image::File
   end
 
   def dir_grouped_by_file_number
-    @number / 200 + 1
+    ( @number / 200 + 1 ) * 200
   end
 
   def file_basename
