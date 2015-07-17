@@ -27,17 +27,18 @@ class Katagami::Image
     [ @number.to_s.rjust(4) , @title ].join( " " )
   end
 
-  def copy( type_of: nil , to: nil )
+
+  def copy_file( type_of: nil , to: nil )
     filetype = type_of
     dir_basename = to
 
     raise unless filetype.string_or_symbol?
     raise unless dir_basename.string?
 
-    file_instance = ::Katagami::Image::File.new( @number , filetype )
-    file_instance.copy( to: dir_basename )
+    puts "Katagami::Image\#copy"
 
-    return nil
+    # file_instance = ::Katagami::Image::File.new( @number , filetype )
+    # file_instance.copy_file( to: dir_basename )
   end
 
 end

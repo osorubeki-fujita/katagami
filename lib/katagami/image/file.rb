@@ -5,11 +5,15 @@ class Katagami::Image::File
     set_filetype( filetype )
   end
 
-  def copy( to: nil )
+  def copy_file( to: nil )
     raise unless to.string?
     dir = to
     before = filename_new( dir )
     after = filename
+
+    puts "#{ before } => #{ after }"
+
+    ::FileUtils.copy_file( before , after )
 
     return nil
   end

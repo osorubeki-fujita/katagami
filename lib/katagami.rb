@@ -50,11 +50,12 @@ module Katagami
 
     puts "#{ selected_images.length} images"
     puts "args: #{ args_send_to_each_image.to_s }"
-    gets.chomp
 
     selected_images.each do | image |
-      image.copy( to: dir_of_date , type_of: filetype )
+      puts image.class.name
+      image.copy_file( to: dir_of_date , type_of: filetype )
     end
+
   end
 
 end
