@@ -11,7 +11,7 @@ class Katagami::Image::File
     before = filename
     after = filename_new( dir )
 
-    puts "#{ before } => #{ after }"
+    puts "  " * 4 + "#{ before } => #{ after }"
 
     ::FileUtils.mkdir_p( ::File.dirname( after ) )
     ::FileUtils.copy_file( before , after )

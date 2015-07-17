@@ -48,14 +48,17 @@ module Katagami
 
     selected_images = DICTIONARY.select { | image | image.send( *args_send_to_each_image ) }
 
-    puts "#{ selected_images.length} images"
-    puts "args: #{ args_send_to_each_image.to_s }"
+    # puts "args: #{ args_send_to_each_image.to_s }"
 
     selected_images.each do | image |
       puts image.class.name
       image.copy_file( to: dir_of_date , type_of: filetype )
     end
 
+    puts ""
+    puts "#{ selected_images.length} images"
+
+    return nil
   end
 
 end

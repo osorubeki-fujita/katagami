@@ -35,6 +35,8 @@ class Katagami::Image
     raise unless filetype.string_or_symbol?
     raise unless dir_basename.string?
 
+    puts to_s
+
     file_instance = ::Katagami::Image::File.new( @number , filetype )
     file_instance.copy_file( to: dir_basename )
   end
