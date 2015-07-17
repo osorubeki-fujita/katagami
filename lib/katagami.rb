@@ -12,7 +12,7 @@ module Katagami
   TOP_DIR = "/Users/shufujita/Creative Cloud Files/Materials/IseKatagami"
 
   def self.init
-    set_dictionary_as_constant
+    set_dictionary_as_const
   end
 
   class << self
@@ -48,8 +48,6 @@ module Katagami
   end
 
 end
-
-Katagami.init
 
 __END__
 
